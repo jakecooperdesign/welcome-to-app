@@ -1,14 +1,16 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
 import App from './App.vue'
-import { store } from './store.js';
 import './assets/css/index.css';
 
 Vue.config.productionTip = false
 
-Vue.use(Vuex);
+
+Vue.filter('capitalize', function (value) {
+    if (!value) return ''
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
+})
 
 new Vue({
   render: h => h(App),
-  store: store
 }).$mount('#app')
