@@ -1,28 +1,39 @@
 <template>
   <div id="app">
     <header class="bg-black py-6 text-white">
-      <div class="container mx-auto flex justify-between items-center">
+      <div class="container px-16 mx-auto flex justify-between items-center">
         <h1 class="text-2xl font-bold">Card Game App</h1>
         <div class="space-x-2">
-          <button @click="undo" class="border border-gray-800 px-4 py-2 rounded hover:bg-gray-200 hover:text-black">
+          <button 
+            @click="undo" :disabled="!canUndo" 
+            class="border border-gray-800 px-4 py-2 rounded hover:bg-gray-200 hover:text-black" 
+            :class="{'opacity-50': !canUndo}"
+          >
             Undo
           </button>
-          <button @click="resetDecks" class="border border-gray-800 px-4 py-2 rounded hover:bg-gray-200 hover:text-black">
+          <button 
+            @click="redo" :disabled="!canRedo" 
+            class="border border-gray-800 px-4 py-2 rounded hover:bg-gray-200 hover:text-black" 
+            :class="{'opacity-50': !canRedo}"
+          >
+            Redo
+          </button>
+          <button @click="$store.commit('resetDecks')" class="border border-gray-800 px-4 py-2 rounded hover:bg-gray-200 hover:text-black">
             Reset
           </button>
-          <button @click="flipAllDecks" class="border border-gray-800 px-4 py-2 rounded hover:bg-gray-200 hover:text-black">
+          <button @click="$store.commit('drawAllCards')" class="border border-gray-800 px-4 py-2 rounded hover:bg-gray-200 hover:text-black">
             Draw Cards
           </button>
         </div>
       </div>
     </header>
     <div class="flex justify-center items-center">
-      <div class="container mx-auto w-full flex justify-between items-start space-x-8 py-16">
+      <div class="container px-16 mx-auto w-full flex justify-between items-start space-x-8 py-16">
         <div v-for="(deck, i) in decks" :key="i" ref="deck" class="bg-gray-200 rounded-lg shadow-md flex-1 flex flex-col items-center">
           <header class="py-3 px-4 bg-gray-700 text-white rounded-t-lg w-full">
             <h2 class="font-bold text-xs uppercase">Deck {{i + 1}}</h2>
           </header>
-          <simple-deck :cards="deck" ref="decks"></simple-deck>
+          <simple-deck ref="decks" :deckId='i'></simple-deck>
         </div>
       </div>
     </div>
@@ -31,32 +42,16 @@
 
 <script>
 import simpleDeck from "./components/simpleDeck.vue";
-import { startingDecks } from './deckFunctions.js'
-
 
 export default {
   name: 'App',
-
   components: {
     simpleDeck
   },
-
   data() {
     return {
       deckShowing: false,
-      decks: startingDecks()
-    }
-  },
-
-  methods: {
-    resetDecks() {
-      this.decks = this.decks = startingDecks()
-    },
-    flipAllDecks() {
-      this.$refs.decks.forEach( deck => deck.drawCard() )
-    },
-    undo() {
-      console.log('undoing...')
+      decks: this.$store.state.decks,
     }
   }
 }

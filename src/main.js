@@ -1,9 +1,15 @@
 import Vue from 'vue'
 import App from './App.vue'
+import Vuex from 'vuex';
+import VuexUndoRedo from 'vuex-undo-redo';
+import store from './store.js';
+
 import './assets/css/index.css';
 
-Vue.config.productionTip = false
+Vue.use(Vuex)
+Vue.use(VuexUndoRedo)
 
+Vue.config.productionTip = false
 
 Vue.filter('capitalize', function (value) {
     if (!value) return ''
@@ -13,4 +19,5 @@ Vue.filter('capitalize', function (value) {
 
 new Vue({
   render: h => h(App),
+  store: store
 }).$mount('#app')

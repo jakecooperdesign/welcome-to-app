@@ -6,7 +6,7 @@
         <div v-else class="empty">
             <simple-card show="empty"></simple-card>
         </div>
-        <div v-if="cards.discard.length" class="discard">
+        <div v-if="cards.discard.length" class="discard" @click="returnCard">
             <simple-card :details="topCard('discard')" show="front"></simple-card>
         </div>
     </div>
@@ -15,14 +15,25 @@
 <script>
 import simpleCard from "./simpleCard";
 export default {
-    props: ['cards'],
+    props: ['deckId'],
     components: {
         simpleCard
     },
+    computed: {
+        cards() {
+            return this.$store.state.decks[this.deckId]
+        }
+    },
     methods: {
         drawCard() {
-            let card = this.cards.library.splice(0,1)[0]
-            this.cards.discard.push(card);
+            if( this.cards.library.length > 0) {
+                this.$store.commit('drawCardForDeck', this.deckId)
+            }
+        },
+        returnCard() {
+            if( this.cards.discard.length > 0) {
+                this.$store.commit('returnCardToDeck', this.deckId)
+            }
         },
         topCard(key) {
             let deck = this.cards[key];

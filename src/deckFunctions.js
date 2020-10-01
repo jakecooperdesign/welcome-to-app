@@ -43,6 +43,5 @@ export let startingDecks = () => {
         discard: []
     };
     decks.push(tempDeck);
-
     return decks;
 }

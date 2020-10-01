@@ -45,7 +45,7 @@ export default {
                 classes = classes.concat(' ' + effectColors[this.details.back]);
             }
             if (this.show == 'empty') {
-                classes = 'card-empty opacity-25 border bg-gray-500 text-white';
+                classes = 'card-empty border bg-gray-300 text-gray-600 text-xs';
             }
             if (this.show == 'front') {
                 classes = `card-front text-6xl font-bold bg-white shadow-md`;
