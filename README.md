@@ -1,29 +1,6 @@
-# card-game-vue
+# Welcome To.... The Vue App!
 
-## Project setup
-```
-yarn install
-```
+## What Is This?
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+This Vue app is a helper for people playing the card/board game "Welcome To" over the internet. The app simulates the card decks that are shared between players, alleviating the need for an additional camera setup just for the cards.
 
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
