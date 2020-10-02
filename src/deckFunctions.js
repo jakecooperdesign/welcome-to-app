@@ -7,14 +7,14 @@ let welcomeToDistribution = {
     'park': [1, 2, 4, 5, 5, 6, 7, 7, 8, 8, 9, 9, 10, 11, 11, 12, 14, 15]
 }
 
-export let shuffleDeck = deck => {
+export const shuffleDeck = deck => {
     deck.sort(() => Math.random(1) < Math.random(1) ? 1 : -1);
     deck.sort(() => Math.random(1) < Math.random(1) ? 1 : -1);
     deck.sort(() => Math.random(1) < Math.random(1) ? 1 : -1);
     return deck;
 };
 
-export let startingDecks = () => {
+export const startingDecks = () => {
     let decks = [];
     let cards = [];
     for (const effect in welcomeToDistribution) {
