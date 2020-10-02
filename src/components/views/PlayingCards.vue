@@ -18,31 +18,7 @@
 <script>
 // import Card from '@/components/Card.vue';
 import Deck from '@/components/Deck.vue';
-
-let suitColors = {
-    '♥': 'red', 
-    '♦': 'red', 
-    '♠': 'black', 
-    '♣': 'black'
-};
-
-const generatePlayingCards = (suits,values) => {
-    return suits.reduce( (cards, s) => {
-        values.forEach( v => cards.push({
-            suit: s,
-            value: v,
-            color: suitColors[s]
-        }))
-        return cards;
-    }, [] );
-}
-
-let playingCards = {
-    suits: [ '♥', '♦', '♠', '♣' ],
-    values: [ 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K' ]
-};
-
-playingCards.cards = generatePlayingCards(playingCards.suits, playingCards.values)
+import { playingCards } from '@/components/PlayingCardGenerator';
 
 export default {
     components: {
@@ -51,7 +27,6 @@ export default {
     },
     data() {
         return {
-            suitColors,
             cards: playingCards.cards
         }
     },
