@@ -15,8 +15,8 @@
             </Card>
         </div>
         <div class="discard">
-            <Card v-if="discarded > 0" @click.native="returnCard">
-                <span :class="`text-${topDiscard.color}-500`">{{ topDiscard.suit }}{{ topDiscard.value }}</span>
+            <Card v-if="discarded > 0" @click.native="returnCard" :color="suitColors[topDiscard.suit]">
+                {{ topDiscard.suit }}{{ topDiscard.value }}
             </Card>
             <Card v-else class="border border-gray-500 rounded-lg opacity-25">
                 <p class="text-center text-xs italic">
@@ -30,6 +30,7 @@
 <script>
 import Card from "@/components/Card.vue";
 import { shuffleDeck } from "@/deckFunctions";
+import { suitColors } from "@/components/PlayingCardGenerator"
 
 export default {
     components: { Card },
@@ -38,6 +39,7 @@ export default {
         return {
             library: [],
             discard: [],
+            suitColors
         }
     },
     mounted() {
