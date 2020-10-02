@@ -1,12 +1,6 @@
 <template>
-    <div>
-        <div v-if="show == 'back'" class="card flex justify-center items-center rounded-lg p-4 shadow-lg bg-gray-800 text-2xl">
-            <slot></slot>
-        </div>  
-        <div v-else class="card flex justify-center items-center rounded-lg p-4 shadow-lg border border-gray-200 text-2xl"
-            :class="`text-${color}-500`">
-            <slot></slot>
-        </div>  
+    <div class="card flex justify-center items-center rounded-lg shadow-lg text-2xl">
+        <slot></slot>
     </div>
 </template>
 

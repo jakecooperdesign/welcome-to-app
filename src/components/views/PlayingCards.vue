@@ -18,7 +18,7 @@
 <script>
 // import Card from '@/components/Card.vue';
 import Deck from '@/components/Deck.vue';
-import { playingCards } from '@/components/PlayingCardGenerator';
+import { playingCards } from '@/generators/PlayingCardGenerator';
 
 export default {
     components: {
