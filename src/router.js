@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HomePage from '@/components/views/HomePage.vue'
-import WelcomeTo from '@/components/views/WelcomeTo.vue'
-import PlayingCards from '@/components/views/PlayingCards.vue'
+import HomePage from '@/views/HomePage.vue'
+import WelcomeTo from '@/views/WelcomeTo.vue'
+import PlayingCards from '@/views/PlayingCards.vue'
+import UploadDeck from '@/views/UploadDeck.vue'
 
 Vue.use(Router)
 
@@ -19,6 +20,10 @@ export default new Router({
         {
             path: '/playing-cards',
             component: PlayingCards
+        },
+        {
+            path: '/upload-deck',
+            component: UploadDeck
         },
     ]
 })

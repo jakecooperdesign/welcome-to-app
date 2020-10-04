@@ -1,21 +1,21 @@
 <template>
     <div class="flex justify-center items-center">
-        <div class="container p-16 mx-auto space-y-16">
+        <div class="container p-16 mx-auto space-y-8">
             <header class="bg-blue-500 text-white p-8 rounded-lg shadow-lg flex justify-between items-center">
                 <h1 class="font-light text-3xl">{{name}}</h1>
                 <div class="controls space-x-2 text-sm">
-                    <button @click="drawCards" class="px-3 py-2 rounded-lg border-white border hover:border-blue-400 hover:text-blue-100">Draw Cards</button>
-                    <!-- <button @click="reset" class="px-3 py-2 rounded-lg border-white border hover:border-blue-400 hover:text-blue-100">Reset</button> -->
+                    <button @click="eachDeck('discardCard')" class="px-3 py-2 rounded-lg border-white border hover:border-blue-400 hover:text-blue-100">Draw Cards</button>
+                    <button @click="eachDeck('reset')" class="px-3 py-2 rounded-lg border-white border hover:border-blue-400 hover:text-blue-100">Reset</button>
                 </div>
             </header>
-            <div class="flex justify-center -m-2 flex-wrap">
-              <div class="p-2">
+            <div class="flex justify-between -mx-2 flex-wrap">
+              <div class="px-2 flex-1">
                 <Deck ref="decks" :cards="decks[0].cards" :showRemaining="true" orientation="vertical"></Deck>
               </div>
-              <div class="p-2">
+              <div class="px-2 flex-1">
                 <Deck ref="decks" :cards="decks[1].cards" :showRemaining="true" orientation="vertical"></Deck>
               </div>
-              <div class="p-2">
+              <div class="px-2 flex-1">
                 <Deck ref="decks" :cards="decks[2].cards" :showRemaining="true" orientation="vertical"></Deck>
               </div>
             </div>
@@ -48,9 +48,9 @@ export default {
         }
     },
     methods: {
-      drawCards() {
-        this.$children.forEach( deck => deck.discardCard())
-      }
+      eachDeck(method) {
+        this.$children.forEach( deck => (typeof deck[method] == 'function') ? deck[method]() : false );
+      },
     }
 }
 </script>

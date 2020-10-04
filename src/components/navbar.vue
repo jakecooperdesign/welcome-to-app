@@ -13,6 +13,9 @@
           <router-link to="/playing-cards" class="border border-gray-700 px-4 py-3 rounded-lg hover:border-red-500 hover:text-red-500">
             Playing Cards
           </router-link>
+          <router-link to="/upload-deck" class="border border-gray-700 px-4 py-3 rounded-lg hover:border-red-500 hover:text-red-500">
+            Upload Deck
+          </router-link>
         </nav>
         <!-- <GameControls></GameControls> -->
       </div>

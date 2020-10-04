@@ -1,8 +1,8 @@
 <template>
     <div class="flex justify-center items-center">
-        <div class="container p-16 mx-auto space-y-16">
+        <div class="container p-16 mx-auto space-y-8">
             <header class="bg-blue-500 text-white p-8 rounded-lg shadow-lg flex justify-between items-center">
-                <h1 class="font-light text-3xl">Playing Cards</h1>
+                <h1 class="font-light text-3xl">{{name}}</h1>
                 <div class="controls space-x-2 text-sm">
                     <button @click="drawCard" class="px-3 py-2 rounded-lg border-white border hover:border-blue-400 hover:text-blue-100">Draw Card</button>
                     <button @click="returnCard" class="px-3 py-2 rounded-lg border-white border hover:border-blue-400 hover:text-blue-100">Return Card</button>
@@ -27,6 +27,7 @@ export default {
     },
     data() {
         return {
+            name: 'Playing Cards',
             cards: playingCards.cards
         }
     },
