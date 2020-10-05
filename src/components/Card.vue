@@ -1,5 +1,5 @@
 <template>
-    <div class="card flex justify-center items-center rounded-lg shadow-lg text-2xl" :style="`width: ${width}rem; height: ${height}rem;`">
+    <div class="card flex justify-center items-center rounded-lg shadow-lg text-4xl" :style="`width: ${width}rem; height: ${height}rem;`">
         <slot></slot>
     </div>
 </template>

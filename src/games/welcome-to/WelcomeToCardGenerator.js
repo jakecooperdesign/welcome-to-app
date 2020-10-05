@@ -9,6 +9,8 @@ let effectColors = {
     'park': 'bg-green-500 text-white'
 };
 
+let welcomeToImageUrl = (effect) => `'/images/welcome-to/welcome-to-${effect}2x.jpg'`;
+
 const welcomeToDistribution = {
     'pool': [13, 12, 11, 10, 8, 7, 6, 4, 3],
     'fence': [15, 14, 13, 11, 11, 10, 10, 9, 8, 8, 7, 6, 6, 5, 5, 3, 2, 1],
@@ -18,39 +20,29 @@ const welcomeToDistribution = {
     'park': [1, 2, 4, 5, 5, 6, 7, 7, 8, 8, 9, 9, 10, 11, 11, 12, 14, 15]
 }
 
-const generateWelcomeToDecks = (cardDistributions) => {
+const generateDecks = (cardDistributions) => {
     let decks = [];
     let cards = [];
-
     for (const effect in cardDistributions) {
         let effectCards = cardDistributions[effect];
-        effectCards.forEach(val => {
-            cards.push({
-                front: {
-                    value: val,
-                    classes: 'bg-white'
-                },
-                back: {
-                    value: effect,
-                    classes: effectColors[effect]
-                }
-            })
-        });
+        effectCards.forEach(val => cards.push({
+            front: {
+                value: val,
+                classes: 'bg-white'
+            },
+            back: {
+                value: effect,
+                classes: effectColors[effect],
+                image_url: welcomeToImageUrl(effect)
+            }
+        }));
     }
-
     cards = shuffleDeck(cards);
-
-    decks.push({
-        cards: cards.splice(0, 27),
-    });
-    decks.push({
-        cards: cards.splice(0, 27),
-    });
-    decks.push({
-        cards: cards.splice(0, 27),
-    });
+    decks.push({ cards: cards.splice(0, 27) });
+    decks.push({ cards: cards.splice(0, 27) });
+    decks.push({ cards: cards.splice(0, 27) });
 
     return decks;
 }
 
-export const WelcomeToDecks = generateWelcomeToDecks(welcomeToDistribution);
+export const generatedWelcomeToDecks = generateDecks(welcomeToDistribution)

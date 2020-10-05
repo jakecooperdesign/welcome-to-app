@@ -2,8 +2,13 @@
     <div class="play-area p-16 rounded-lg justify-center bg-gray-200 space-y-8">
         <div class="deck flex justify-center items-center" :class="orientationClasses">
             <div class="library">
-                <Card v-if="remaining > 0" show="back" @click.native="discardCard" :class="topLibrary.back.classes">
-                    {{ topLibrary.back.value | capitalize }}
+                <Card 
+                    v-if="remaining > 0" 
+                    show="back" 
+                    @click.native="discardCard" 
+                    :class="topLibrary.back.classes"
+                    :style="topLibrary.back.image_url ? `background: url(${topLibrary.back.image_url}) center center / cover;` : false">
+                    <!-- {{ topLibrary.back.value | capitalize }} -->
                 </Card>
                 <Card v-else class="border border-gray-500 rounded-lg opacity-25">
                     <p class="text-center text-xs italic">
@@ -65,16 +70,13 @@ export default {
     },
     methods: {
         discardCard() {
-            let card = this.library.pop();
-            this.discard.unshift(card);
+            if (this.library.length > 0) this.discard.unshift( this.library.pop() );
         },
         returnCard() {
-            let card = this.discard.shift();
-            this.library.push(card);
+            this.library.push( this.discard.shift() );
         },
         shuffleLibrary() {
-            let cards = this.library;
-            this.library = shuffleDeck(cards);
+            this.library = shuffleDeck( this.library );
         },
         reset() {
             this.library = JSON.parse(JSON.stringify(this.cards));
