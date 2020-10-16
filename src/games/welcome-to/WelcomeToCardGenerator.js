@@ -1,15 +1,5 @@
 import { shuffleDeck } from "@/deckFunctions";
-
-let effectColors = {
-    'pool': 'bg-blue-500 text-white',
-    'fence': 'bg-white text-green-500',
-    'biz': 'bg-red-500 text-white',
-    'agent': 'bg-yellow-500',
-    'money': 'bg-purple-800 text-white',
-    'park': 'bg-green-500 text-white'
-};
-
-let welcomeToImageUrl = (effect) => `'/images/welcome-to/welcome-to-${effect}2x.jpg'`;
+import _ from 'lodash';
 
 const welcomeToDistribution = {
     'pool': [13, 12, 11, 10, 8, 7, 6, 4, 3],
@@ -28,21 +18,51 @@ const generateDecks = (cardDistributions) => {
         effectCards.forEach(val => cards.push({
             front: {
                 value: val,
-                classes: 'bg-white'
             },
             back: {
                 value: effect,
-                classes: effectColors[effect],
-                image_url: welcomeToImageUrl(effect)
+                image_url: `'/images/welcome-to/welcome-to-${effect}2x.jpg'`
             }
         }));
     }
     cards = shuffleDeck(cards);
-    decks.push({ cards: cards.splice(0, 27) });
-    decks.push({ cards: cards.splice(0, 27) });
-    decks.push({ cards: cards.splice(0, 27) });
+    decks.push( cards.splice(0, 27) );
+    decks.push( cards.splice(0, 27) );
+    decks.push( cards.splice(0, 27) );
 
     return decks;
 }
 
-export const generatedWelcomeToDecks = generateDecks(welcomeToDistribution)
+function convertCardDecksToTurnDecks(decks) {
+    let turns = [];
+    decks.forEach(deck => {
+        turns.push(
+            deck.reduce((sum, card, i) => {
+                if (i + 1 <= deck.length - 1) {
+                    sum.push({
+                        value: card.front.value,
+                        effect: deck[i + 1].back.value
+                    })
+                }
+                return sum;
+            }, [])
+        );
+    })
+    return turns;
+}
+
+function mergeTurnDecks(turns) {
+    return _.zip(turns[0], turns[1], turns[2]);
+}
+let decks1 = generateDecks(welcomeToDistribution)
+let decks2 = generateDecks(welcomeToDistribution)
+let decks = decks1.reduce((decks, deck, i) => {
+    decks.push(deck.concat(decks2[i]))
+    return decks;
+}, [])
+decks = convertCardDecksToTurnDecks(decks);
+let turns = mergeTurnDecks(decks);
+
+console.log(turns);
+
+export default turns;
